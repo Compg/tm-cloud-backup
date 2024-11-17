@@ -220,7 +220,7 @@ function openSyncModal() {
 		.addEventListener('click', async function () {
 			let extensionURLs = JSON.parse(localStorage.getItem('TM_useExtensionURLs') || '[]');
 			if (!extensionURLs.some((url) => url.endsWith('s3.js'))) {
-				extensionURLs.push('https://github.com/Compg/tm-cloud-backup/blob/main/s3.js');
+				extensionURLs.push('https://compg.github.io/tm-cloud-backup/s3.js');
 				localStorage.setItem('TM_useExtensionURLs', JSON.stringify(extensionURLs));
 			}
 			const bucketName = awsBucketInput.value.trim();
