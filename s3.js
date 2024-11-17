@@ -220,7 +220,7 @@ function openSyncModal() {
 		.addEventListener('click', async function () {
 			let extensionURLs = JSON.parse(localStorage.getItem('TM_useExtensionURLs') || '[]');
 			if (!extensionURLs.some((url) => url.endsWith('s3.js'))) {
-				extensionURLs.push('https://itcon-pty-au.github.io/typingmind-cloud-backup/s3.js');
+				extensionURLs.push('https://github.com/Compg/tm-cloud-backup/s3.js');
 				localStorage.setItem('TM_useExtensionURLs', JSON.stringify(extensionURLs));
 			}
 			const bucketName = awsBucketInput.value.trim();
@@ -253,7 +253,7 @@ function openSyncModal() {
 					}
 				}
 				startBackupInterval();
-				
+
 			} catch (err) {
 				const actionMsgElement = document.getElementById('action-msg');
 				actionMsgElement.textContent = `Invalid AWS details: ${err.message}`;
@@ -310,7 +310,7 @@ document.addEventListener('visibilitychange', async () => {
 	else {
 		localStorage.setItem('activeTabBackupRunning', 'false');
 		clearInterval(backupInterval);
-        	backupIntervalRunning = false;
+		backupIntervalRunning = false;
 	}
 });
 
@@ -365,20 +365,20 @@ async function checkAndImportBackup() {
 
 // Function to start the backup interval
 function startBackupInterval() {
-    if (backupIntervalRunning) return;
-    // Check if another tab is already running the backup
-    if (localStorage.getItem('activeTabBackupRunning') === 'true') {
-        return;
-    }
-    backupIntervalRunning = true;
-    localStorage.setItem('activeTabBackupRunning', 'true');
-    backupInterval = setInterval(async () => {
-        if (wasImportSuccessful && !isExportInProgress) {
-            isExportInProgress = true;
-            await backupToS3();
-            isExportInProgress = false;
-        }
-    }, 60000);
+	if (backupIntervalRunning) return;
+	// Check if another tab is already running the backup
+	if (localStorage.getItem('activeTabBackupRunning') === 'true') {
+		return;
+	}
+	backupIntervalRunning = true;
+	localStorage.setItem('activeTabBackupRunning', 'true');
+	backupInterval = setInterval(async () => {
+		if (wasImportSuccessful && !isExportInProgress) {
+			isExportInProgress = true;
+			await backupToS3();
+			isExportInProgress = false;
+		}
+	}, 60000);
 }
 
 // Function to load AWS SDK asynchronously
